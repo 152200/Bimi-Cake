@@ -8,6 +8,7 @@ import Flavor from './routes/customize/Flavor';
 import Color from './routes/customize/Color';
 import Toppings from './routes/customize/Toppings'
 import Write from './routes/customize/Write';
+import Collection from './routes/Collection';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/collection/:collectionName" element={<Collection />} />
           <Route path="/customize" element={<Customize />}>
             <Route index element={<Navigate to="shape" replace />} />
             <Route path="shape" element={<Shape />} />
