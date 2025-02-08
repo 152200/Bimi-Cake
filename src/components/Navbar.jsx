@@ -24,7 +24,7 @@ export default function Navbar() {
 
         {/* Desktop Icons */}
         <div className="hidden lg:flex items-center gap-6">
-          <Heart className="text-white cursor-pointer" size={24} />
+          <Link to='/favorites'><Heart className="text-white cursor-pointer" size={24} /></Link>
           <TbTruckDelivery className="text-white cursor-pointer" size={24} />
           <Link to='/cart'><ShoppingBag className="text-white cursor-pointer" size={24} /></Link>
           <img
@@ -39,7 +39,7 @@ export default function Navbar() {
       {isMobileMenuOpen && (
         <div className="lg:hidden mt-4 p-4 bg-white rounded-lg shadow-lg">
           <div className="flex justify-around">
-            <Heart className="text-[#E5C1C1] cursor-pointer" size={24} />
+            <Link to='favorites'><Heart className="text-[#E5C1C1] cursor-pointer" size={24} /></Link>
             <TbTruckDelivery className="text-[#E5C1C1] cursor-pointer" size={24} />
             <Link to='/cart'><ShoppingBag className="text-[#E5C1C1] cursor-pointer" size={24} /></Link>
             <img

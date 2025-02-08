@@ -10,6 +10,7 @@ import Toppings from './routes/customize/Toppings'
 import Write from './routes/customize/Write';
 import Collection from './routes/Collection';
 import Cart from './routes/Cart';
+import Favorites from './routes/Favorites';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/collection/:collectionName" element={<Collection />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/customize" element={<Customize />}>
             <Route index element={<Navigate to="shape" replace />} />
             <Route path="shape" element={<Shape />} />
