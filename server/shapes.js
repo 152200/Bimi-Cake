@@ -3,7 +3,7 @@ export const cakeShapes = [
     {
         id: 'double-round',
         name: 'Double Round',
-        image: 'https://images.unsplash.com/photo-1535254043276-5914d30e0850?auto=format&fit=crop&q=80&w=400&h=400',
+        image: 'https://chelsweets.com/wp-content/uploads/2023/02/finished-heart-shaped-chocolate-cakev1-3.jpg',
         price: 140,
         specs: 'Good for 15-20 people',
         size: '4.5kg | 8×6+6×6'

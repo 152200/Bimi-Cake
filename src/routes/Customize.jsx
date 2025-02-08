@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import { Cake, Palette, UtensilsCrossed, Cherry, PenTool } from 'lucide-react';
+import { TiTickOutline } from "react-icons/ti";
 
 export default function Customize() {
   const location = useLocation();
@@ -17,7 +18,7 @@ export default function Customize() {
     <main className="max-w-7xl mx-auto px-4 py-8">
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Customize Steps Sidebar */}
-        <div className="lg:w-48 bg-[#FDF6F0] rounded-lg p-4">
+        <div className="lg:w-48 bg-[#FDF6F0] rounded-lg p-4 flex flex-col justify-between">
           <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible">
             {customizeSteps.map((step) => (
               <NavLink
@@ -34,6 +35,12 @@ export default function Customize() {
               </NavLink>
             ))}
           </div>
+           <button className='flex items-center gap-3 p-3 rounded-lg flex-shrink-0 lg:flex-shrink 
+                 text-gray-600 hover:bg-[#E5C1C1] hover:text-white
+                  cursor-pointer transition-colors w-full font-bold'>
+            <TiTickOutline size={24}/>
+            <span className="font-medium whitespace-nowrap">Confirm</span>
+           </button>
         </div>
 
         {/* Main Customize Area */}

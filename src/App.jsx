@@ -6,6 +6,8 @@ import Customize from './routes/Customize';
 import Shape from './routes/customize/Shape';
 import Flavor from './routes/customize/Flavor';
 import Color from './routes/customize/Color';
+import Toppings from './routes/customize/Toppings'
+import Write from './routes/customize/Write';
 
 function App() {
   return (
@@ -19,8 +21,8 @@ function App() {
             <Route path="shape" element={<Shape />} />
             <Route path="flavor" element={<Flavor />} />
             <Route path="color" element={<Color />} />
-            {/* <Route path="toppings" element={<Toppings />} /> */}
-            {/* <Route path="write" element={<Write />} /> */}
+            <Route path="toppings" element={<Toppings />} />
+            <Route path="write" element={<Write />} />
           </Route>
         </Routes>
       </div>

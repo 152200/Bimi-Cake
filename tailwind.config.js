@@ -9,6 +9,14 @@ export default {
       fontFamily: {
         script: ['Dancing Script', 'cursive'],
       },
+      screens: {
+        xs: '390px', // Extra small screens
+        sm: '640px', // Small screens
+        md: '768px', // Medium screens
+        lg: '900px', // Large screens
+        xl: '1546px', // Extra large screens
+        '2xl': '1600px', // 2x Extra large screens
+      },
     },
   },
   plugins: [],
