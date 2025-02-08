@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Heart, ShoppingBag, MessageSquare, Menu } from 'lucide-react';
+import { Heart, ShoppingBag, Menu } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { TbTruckDelivery } from "react-icons/tb";
+
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -23,8 +25,8 @@ export default function Navbar() {
         {/* Desktop Icons */}
         <div className="hidden lg:flex items-center gap-6">
           <Heart className="text-white cursor-pointer" size={24} />
-          <MessageSquare className="text-white cursor-pointer" size={24} />
-          <ShoppingBag className="text-white cursor-pointer" size={24} />
+          <TbTruckDelivery className="text-white cursor-pointer" size={24} />
+          <Link to='/cart'><ShoppingBag className="text-white cursor-pointer" size={24} /></Link>
           <img
             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=40&h=40"
             alt="Profile"
@@ -38,8 +40,8 @@ export default function Navbar() {
         <div className="lg:hidden mt-4 p-4 bg-white rounded-lg shadow-lg">
           <div className="flex justify-around">
             <Heart className="text-[#E5C1C1] cursor-pointer" size={24} />
-            <MessageSquare className="text-[#E5C1C1] cursor-pointer" size={24} />
-            <ShoppingBag className="text-[#E5C1C1] cursor-pointer" size={24} />
+            <TbTruckDelivery className="text-[#E5C1C1] cursor-pointer" size={24} />
+            <Link to='/cart'><ShoppingBag className="text-[#E5C1C1] cursor-pointer" size={24} /></Link>
             <img
               src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=40&h=40"
               alt="Profile"

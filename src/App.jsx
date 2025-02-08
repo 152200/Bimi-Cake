@@ -9,6 +9,7 @@ import Color from './routes/customize/Color';
 import Toppings from './routes/customize/Toppings'
 import Write from './routes/customize/Write';
 import Collection from './routes/Collection';
+import Cart from './routes/Cart';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/collection/:collectionName" element={<Collection />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/customize" element={<Customize />}>
             <Route index element={<Navigate to="shape" replace />} />
             <Route path="shape" element={<Shape />} />
