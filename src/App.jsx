@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Home from './routes/Home';
 import Customize from './routes/Customize';
@@ -11,6 +12,8 @@ import Write from './routes/customize/Write';
 import Collection from './routes/Collection';
 import Cart from './routes/Cart';
 import Favorites from './routes/Favorites';
+import { LoginForm } from './routes/LoginForm';
+import { SignupForm } from './routes/SignupForm';
 
 function App() {
   return (
@@ -22,6 +25,8 @@ function App() {
           <Route path="/collection/:collectionName" element={<Collection />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<SignupForm />} />
           <Route path="/customize" element={<Customize />}>
             <Route index element={<Navigate to="shape" replace />} />
             <Route path="shape" element={<Shape />} />
@@ -31,6 +36,30 @@ function App() {
             <Route path="write" element={<Write />} />
           </Route>
         </Routes>
+        <Toaster 
+          position="top-center"
+          reverseOrder={false}
+          gutter={8}
+          toastOptions={{
+            duration: 5000,
+            style: {
+              background: '#363636',
+              color: '#fff',
+            },
+            success: {
+              duration: 3000,
+              theme: {
+                primary: '#4aed88',
+              },
+            },
+            error: {
+              duration: 3000,
+              theme: {
+                primary: '#ff4b4b',
+              },
+            },
+          }}
+        />
       </div>
     </Router>
   );
