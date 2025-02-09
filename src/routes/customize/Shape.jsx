@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { cakeShapes } from '../../../server/shapes';
+import { useDispatch, useSelector } from 'react-redux';
+import { setShape } from '../../app/features/customizeSlice';
 
 export default function Shape() {
-  const [selectedShape, setSelectedShape] = useState('double-round');
+
+  const originalShape = useSelector( (state) => state.customize.shape)
+  const [selectedShape, setSelectedShape] = useState(originalShape? originalShape.id :'double-round');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+
   
   const handleNext = () => {
     navigate('../flavor');
   };
+
+  const handleSelectShape = (shape) => {
+    dispatch(setShape(shape))
+    setSelectedShape(shape.id)
+  }
+
 
   return (
     <>
@@ -36,7 +49,7 @@ export default function Shape() {
         {cakeShapes.map((shape) => (
           <div
             key={shape.id}
-            onClick={() => setSelectedShape(shape.id)}
+            onClick={() => {handleSelectShape(shape)} }
             className={`bg-[#FDF6F0] rounded-lg p-4 cursor-pointer transition-all ${
               selectedShape === shape.id ? 'ring-2 ring-[#E5C1C1]' : ''
             }`}

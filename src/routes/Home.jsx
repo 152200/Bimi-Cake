@@ -1,75 +1,79 @@
 import React from 'react';
-import { Search, ChevronRight, ShoppingBag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cakes } from '../../server/cakes';
+import CakeCard from '../components/CakeCard';
+import { ChevronRight } from 'lucide-react';
 
-export default function Home() {
+const Home = () => {
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
-      {/* Search Bar */}
-      <div className="flex-1 max-w-2xl mx-auto mb-8">
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="search"
-            className="w-full px-4 py-2 rounded-full bg-gray-100"
-          />
-          <Search className="absolute right-4 top-2.5 text-gray-400" size={20} />
-        </div>
-      </div>
-
-      {/* Hero Banner */}
-      <Link to="/customize" className="block mb-12">
-        <div className="relative rounded-lg overflow-hidden">
-          <div className="bg-[#B8D1E7] p-8 flex items-center">
-            <div className="flex-1">
-              <h2 className="text-4xl font-bold text-gray-800 mb-2">Make your Bimi Cake!</h2>
-              <p className="text-gray-600 text-lg">No one can do it better than you</p>
-            </div>
+      {/* Hero Section */}
+      <section className="mb-16">
+        <div className="relative rounded-2xl overflow-hidden bg-[#FDF6F0]">
+          <div className="absolute inset-0">
             <img
-              src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=300&h=300"
-              alt="Featured Cake"
-              className="w-64 h-64 object-cover rounded-lg "
+              src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&q=80&w=2000&h=600"
+              alt="Cake Background"
+              className="w-full h-full object-cover opacity-20"
             />
-            <ChevronRight className="absolute right-4 text-gray-600" size={32} />
+          </div>
+          
+          <div className="relative flex items-center justify-between px-8 py-12 lg:py-16">
+            <div className="max-w-xl">
+              <h1 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+                Make Your Dream Cake Come True
+              </h1>
+              <p className="text-gray-600 text-lg mb-8">
+                Design your perfect cake for any occasion. Choose from our curated collections 
+                or create your own masterpiece.
+              </p>
+              <Link
+                to="/customize/shape"
+                className="inline-flex items-center gap-2 bg-[#E5C1C1] text-white px-8 py-3 
+                         rounded-lg font-semibold hover:bg-[#d8b4b4] transition-colors"
+              >
+                Start Customizing
+                <ChevronRight size={20} />
+              </Link>
+            </div>
+
+            <div className="hidden lg:block">
+              <div className="relative w-80 h-80">
+                <img
+                  src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=400&h=400"
+                  alt="Featured Cake"
+                  className="w-full h-full object-cover rounded-2xl shadow-2xl transform 
+                         -rotate-6 hover:rotate-0 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 rounded-2xl border-4 border-white 
+                            transform rotate-6 hover:rotate-0 transition-transform duration-300" />
+              </div>
+            </div>
           </div>
         </div>
-      </Link>
+      </section>
 
       {/* Collections */}
-      {cakes.map((collection, index) => (
-        <section key={index} className={index !== cakes.length - 1 ? "mb-12" : ""}>
-          <div className="flex justify-between items-center mb-6">
+      {cakes.map((collection) => (
+        <section key={collection.id} className="mb-16">
+          <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl font-bold text-gray-800">{collection.collection}</h2>
-            <Link 
-              to={`/collection/${collection.collection.toLowerCase().replace(/\s+/g, '-')}`}
-              className="text-gray-500 hover:text-gray-700"
+            <Link
+              to={`/collection/${collection.id}`}
+              className="text-[#E5C1C1] hover:text-[#d8b4b4] font-medium"
             >
-              See all
+              See All
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {collection.cakes.slice(0, 5).map((cake, cakeIndex) => (
-              <div 
-                key={`${index}-${cakeIndex}`} 
-                className="bg-[#FDF6F0] rounded-lg p-4 relative group"
-              >
-                <img
-                  src={cake.image}
-                  alt={cake.name}
-                  className="w-full h-48 object-cover rounded-lg mb-4"
-                />
-                <h3 className="font-semibold text-gray-800">{cake.name}</h3>
-                <p className="text-gray-500 text-sm">{cake.flavor}</p>
-                <div className="flex justify-between items-center mt-2">
-                  <span className="font-bold text-gray-800">${cake.price}</span>
-                  <ShoppingBag className="text-gray-600" size={20} />
-                </div>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {collection.cakes.slice(0, 4).map((cake) => (
+              <CakeCard key={cake.id} cake={cake} />
             ))}
           </div>
         </section>
       ))}
     </main>
   );
-}
+};
+
+export default Home;

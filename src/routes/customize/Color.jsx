@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { cakeColors } from '../../../server/colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { setColor } from '../../app/features/customizeSlice';
 
 export default function Color() {
-  const [selectedColor, setSelectedColor] = useState('double-round');
+  const originalColor = useSelector( (state) => state.customize.color)
+  const [selectedColor, setSelectedColor] = useState(originalColor? originalColor: '#FFFFFF');
   const navigate = useNavigate();
   
-  
+    const dispatch = useDispatch();
 
   const handleNext = () => {
     navigate('../toppings');
   };
+
+  const handleSelectColor = (color) => {
+      dispatch(setColor(color));
+      setSelectedColor(color);
+    }
 
 
 return (
@@ -42,7 +50,7 @@ return (
             key={index}
             className="w-8 h-8 rounded-full border border-gray-300"
             style={{ backgroundColor: color }}
-            onClick={() => setSelectedColor(color)}
+            onClick={() => {handleSelectColor(color)}}
           ></button>
         ))}
       </div>
