@@ -14,6 +14,8 @@ import Cart from './routes/Cart';
 import Favorites from './routes/Favorites';
 import { LoginForm } from './routes/LoginForm';
 import { SignupForm } from './routes/SignupForm';
+import AddNewCake from './routes/admin/AddNewCake';
+import ManageOrders from './routes/admin/ManageOrders';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignupForm />} />
+          <Route path="/admin/add-new-cake" element={<AddNewCake />}/>
+          <Route path="/admin/manage-orders" element={<ManageOrders />}/>
           <Route path="/customize" element={<Customize />}>
             <Route index element={<Navigate to="shape" replace />} />
             <Route path="shape" element={<Shape />} />
