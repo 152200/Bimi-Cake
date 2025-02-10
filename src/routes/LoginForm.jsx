@@ -29,7 +29,12 @@ export function LoginForm() {
     setIsLoading(true)
 
     try {
-      const result = await dispatch(loginUser(formData.phone, formData.password))
+      // Clean up phone number - remove any existing formatting
+      let phoneNumber = formData.phone.replace(/\+970|^0/, '')
+      // Add back the zero prefix
+      phoneNumber = `0${phoneNumber}`
+
+      const result = await dispatch(loginUser(phoneNumber, formData.password))
       if (result.success) {
         toast.success('Logged in successfully!')
         navigate('/')

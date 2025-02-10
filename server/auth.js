@@ -5,6 +5,7 @@ export const users = [
     email: "john@example.com",
     phone: "0599123456",
     password: "Test@123", // In real app, this would be hashed
+    role: "user"
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ export const users = [
     email: "jane@example.com",
     phone: "0599789012",
     password: "Test@123",
+    role: "admin"
   },
 ];
 
