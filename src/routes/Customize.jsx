@@ -8,10 +8,15 @@ import { resetCustomization } from '../app/features/customizeSlice';
 import { toast } from 'react-hot-toast';
 
 export default function Customize() {
+
+
+
+
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const customization = useSelector((state) => state.customize);
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
   const customizeSteps = [
     { icon: <Cake size={24} />, label: 'Shape', path: 'shape' },
@@ -22,12 +27,18 @@ export default function Customize() {
   ];
 
   const handleConfirm = () => {
+    if (!isAuthenticated) {
+      toast.error('Please login to create a custom cake');
+      navigate('/login');
+      return;
+    }
+
     // Check if all customizations are complete
     if (!customization.shape || 
         !customization.flavor || 
         !customization.color || 
-        !customization.topping || 
-        !customization.message) {
+        !customization.topping  
+        ) {
       toast.error('Please complete all customization steps before confirming');
       return;
     }

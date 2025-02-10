@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
-import { Phone, Loader2 } from 'lucide-react'
+import { Phone, Loader2, Lock } from 'lucide-react'
 import { toast } from 'react-hot-toast'
 import { loginSchema } from '../lib/validation'
-import { users } from '../../server/auth'
 import { useNavigate, Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../app/features/authSlice'
 
 export function LoginForm() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     phone: '',
+    password: '',
     remember: false,
   })
 
@@ -26,35 +29,15 @@ export function LoginForm() {
     setIsLoading(true)
 
     try {
-      // Validate form data
-      const validatedData = loginSchema.parse(formData)
-
-      // Format phone number to include country code if not present
-      const phoneNumber = validatedData.phone.startsWith('+')
-        ? validatedData.phone
-        : `+970${validatedData.phone}`
-
-      // Check if user exists in mock data
-      const user = users.find(u => u.phone === phoneNumber)
-      
-      if (!user) {
-        throw new Error('Phone number not found')
-      }
-
-      // Simulate successful login
-      setTimeout(() => {
-        // Store user info in localStorage or state management
-        localStorage.setItem('user', JSON.stringify(user))
-        toast.success('Login successful!')
+      const result = await dispatch(loginUser(formData.phone, formData.password))
+      if (result.success) {
+        toast.success('Logged in successfully!')
         navigate('/')
-      }, 1000)
-      
-    } catch (error) {
-      if (error.name === 'ZodError') {
-        error.errors.forEach((err) => toast.error(err.message))
       } else {
-        toast.error(error.message || 'Something went wrong')
+        toast.error(result.error)
       }
+    } catch (error) {
+      toast.error('Login failed')
     } finally {
       setIsLoading(false)
     }
@@ -91,6 +74,20 @@ export function LoginForm() {
                 onChange={handleChange}
                 className="block w-full pl-24 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Phone Number"
+              />
+            </div>
+
+            <div className="relative">
+            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                <Lock size={20} />
+              </span>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="block w-full pl-24 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Password"
               />
             </div>
 

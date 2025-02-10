@@ -4,15 +4,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../app/features/cartSlice';
 import { toggleFavorite } from '../app/features/favoriteSlice';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const CakeCard = ({ cake }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const favorites = useSelector(state => state.favorites.items);
   const isFavorite = favorites.some(item => item.id === cake.id);
 
   const handleAddToCart = (e) => {
-    e.preventDefault(); // Prevent any parent click events
+    e.preventDefault();
     e.stopPropagation();
+    
+    if (!isAuthenticated) {
+      toast.error('Please login to add items to cart');
+      navigate('/login');
+      return;
+    }
     
     const cakeToAdd = {
       ...cake,
@@ -25,20 +34,24 @@ const CakeCard = ({ cake }) => {
       toast.success('Added to cart!');
     } catch (error) {
       toast.error('Failed to add to cart');
-      console.error('Cart error:', error);
     }
   };
 
   const handleToggleFavorite = (e) => {
-    e.preventDefault(); // Prevent any parent click events
+    e.preventDefault();
     e.stopPropagation();
+    
+    if (!isAuthenticated) {
+      toast.error('Please login to add favorites');
+      navigate('/login');
+      return;
+    }
     
     try {
       dispatch(toggleFavorite(cake));
       toast.success(isFavorite ? 'Removed from favorites!' : 'Added to favorites!');
     } catch (error) {
       toast.error('Failed to update favorites');
-      console.error('Favorites error:', error);
     }
   };
 

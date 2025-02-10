@@ -3,6 +3,7 @@ import cartReducer from './features/cartSlice';
 import customizeReducer from './features/customizeSlice';
 import favoriteReducer from './features/favoriteSlice';
 import modalReducer from './features/modalSlice';
+import authReducer from './features/authSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     customize: customizeReducer,
     favorites: favoriteReducer,
     modal: modalReducer,
+    auth: authReducer,
   },
 })
 
